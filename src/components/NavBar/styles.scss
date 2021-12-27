@@ -1,0 +1,80 @@
+@use '../../styles/vars';
+
+.navbar {
+  display: flex;
+  width: 100%;
+  height: 5rem;
+  background-color: vars.$mariner;
+  color: vars.$golden-grass;
+  justify-content: space-between;
+  padding: 0 1rem;
+  align-items: flex-end;
+  padding-bottom: 1.5rem;
+  &__logo {
+    font-family: Stoked;
+    width: 40%;
+    font-size: 2rem;
+  }
+  &__items {
+    display: flex;
+    justify-content: space-evenly;
+    width: 60%;
+    font-size: 1.3rem;
+  }
+  &__burger {
+    display: none;
+  }
+}
+
+.filter {
+  display: none;
+}
+
+@media screen and(max-width: 767px) {
+  .navbar {
+    &__logo {
+      width: fit-content;
+    }
+    &__items {
+      display: none;
+      &__item {
+        margin-bottom: 2rem;
+      }
+    }
+    &__burger {
+      display: flex;
+      &__button {
+        background: none;
+        border: none;
+      }
+      &__sidebar {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        background-color: vars.$mariner;
+        font-weight: bold;
+        font-size: 24px;
+        width: 30%;
+        height: 100%;
+        top: 5rem;
+        right: 0;
+        align-items: flex-end;
+        padding-right: 2rem;
+        transition: all 2s linear;
+        &__hidden {
+          display: none;
+        }
+      }
+    }
+  }
+  .filter {
+    display: flex;
+    width: 70%;
+    background-color: #505050;
+    opacity: 0.6;
+    height: 100%;
+    top: 5rem;
+    left: 0;
+    position: fixed;
+  }
+}

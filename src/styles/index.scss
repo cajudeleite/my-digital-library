@@ -1,18 +1,37 @@
 @use 'reset';
 @use 'vars';
 
-body {
-  font-family: sans-serif;
-}
-
-/* 
   // or you can import your own font
   @font-face {
-    font-family: 'Roboto';
-    src: url('../assets/fonts/Roboto-Regular.ttf');
+    font-family: 'Stoked';
+    src: url('../assets/fonts/Stoked.ttf');
+  }
+
+  @font-face {
+    font-family: 'Kollektif';
+    src: url('../assets/fonts/Kollektif.ttf');
+  }
+
+  @font-face {
+    font-family: 'Kollektif';
+    src: url('../assets/fonts/Kollektif-Italic.ttf');
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: 'Kollektif';
+    src: url('../assets/fonts/Kollektif-Bold.ttf');
+    font-weight: bold;
+  }
+
+  @font-face {
+    font-family: 'Kollektif';
+    src: url('../assets/fonts/Kollektif-BoldItalic.ttf');
+    font-weight: bold;
+    font-style: italic;
   }
 
   body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Kollektif', sans-serif;
+    background-color: vars.$citrine-white;
   }
-*/
