@@ -2,6 +2,7 @@
 import './styles.scss';
 import NavBar from '../NavBar';
 import SearchBar from '../SearchBar';
+import MoviesDbList from '../MovieDbList';
 import { Route, Switch } from 'react-router-dom';
 import { useState } from 'react';
 import { simplifyMovies } from '../../utils/movies';
@@ -25,6 +26,7 @@ const App = () => {
       setReverse(false);
       setPlaceholder('Veuillez saisir un titre de film');
       setSearchValue('');
+      setMovies([]);
     } else {
       setReverse(true);
       setPlaceholder('Veuillez saisir un titre de film');
@@ -36,7 +38,7 @@ const App = () => {
       // on réinitialise le nombre de résultats total
       setNbResults(0);
 
-      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=a5b6184c80781706fbb134c3a33bf034&language=fr-FR&query=${searchValue}&page=${page}&include_adult=true`).then( // avec the, on définit le traiement à réaliser si la promesse est tenue
+      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=a5b6184c80781706fbb134c3a33bf034&language=fr-FR&query=${searchValue}&page=${page}`).then( // avec the, on définit le traiement à réaliser si la promesse est tenue
         (response) => {
           console.log(response);
           // on récupère le tableau de films dans la réponse
@@ -71,7 +73,7 @@ const App = () => {
 
     setPage(newPage);
 
-    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=a5b6184c80781706fbb134c3a33bf034&language=fr-FR&query=${search_value}&page=${page = newPage}&include_adult=true`).then(
+    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=a5b6184c80781706fbb134c3a33bf034&language=fr-FR&query=${search_value}&page=${page = newPage}`).then(
       (response) => {
         const moviesFromApi = response.data.results;
 
@@ -112,6 +114,7 @@ const App = () => {
             setReverse={setReverse}
             placeholder={placeholder}
           />
+          <MoviesDbList movies={movies} />
         </Route>
         <Route path='/lol' exact>
           <h1>Composant : Lol</h1>
