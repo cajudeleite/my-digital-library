@@ -1,0 +1,20 @@
+@use '../../styles/vars';
+
+.more-results {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  &__pages{
+    display: flex;
+    &__page {
+      &__current {
+        color: vars.$golden-grass;
+      }
+    }
+  }
+  &__end {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

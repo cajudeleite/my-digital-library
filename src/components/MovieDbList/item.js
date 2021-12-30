@@ -23,13 +23,19 @@ const Item = ({
           }
         )
         setDirectorName(directors.join(', '));
-        console.log('hello', directorName);
       },
     ).catch(
       () => {
         directors.push('Pas de directeur');
       },
     );
+  };
+
+  const trimOverview = () => {
+    if (overview.length > 600) {
+      return overview.substring(0, 600) + '...';
+    }
+    return overview;
   };
 
   const posterImage = () =>{
@@ -47,7 +53,7 @@ const Item = ({
       <div className="movielist__card__header">
         <h2 className="movielist__card__header__title">{title}</h2>
         <h3 className="movielist__card__header__directors">{directorName}</h3>
-        <p className="movielist__card__header__overview">{overview}</p>
+        <p className="movielist__card__header__overview">{trimOverview(650)}</p>
         <button className="movielist__card__header__button" onClick={() => {
           window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
           console.log(film_id);

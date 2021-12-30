@@ -15,7 +15,6 @@ const SearchBar = ({ searchValue, setSearchValue, method, reverse, setReverse, p
           value={searchValue}
           onChange={
             (event) => {
-              console.log('nouvelle valeur : ', event.target.value);
               setSearchValue(event.target.value);
               if (searchValue.length === 1 && reverse) {console.log('switch');};
             }
