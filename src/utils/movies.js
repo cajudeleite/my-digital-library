@@ -16,6 +16,7 @@ export const simplifyMyMovies = (movies) => (
       overview: movie.overview,
       film_id: movie.film_id,
       poster_path: movie.poster_path,
+      true_id: movie.id,
     }),
   )
 );

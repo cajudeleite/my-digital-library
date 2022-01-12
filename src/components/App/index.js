@@ -133,6 +133,7 @@ const App = () => {
 
           const searchedMovies = [];
 
+
           formatedMoviesFromApi.map(
             (movie) => {
               const movieTitle = movie.title.toLowerCase();
@@ -142,6 +143,7 @@ const App = () => {
                   overview: movie.overview,
                   film_id: movie.film_id,
                   poster_path: movie.poster_path,
+                  true_id: movie.true_id,
                 })
               }
             }
@@ -175,7 +177,7 @@ const App = () => {
             placeholder={placeholder}
           />
           <MovieNavBar current={1}/>
-          <MoviesDbList movies={movies} nbResults={nbResults} />
+          <MoviesDbList movies={movies} my={false}/>
           {totalPages > 1 && <MoreResults pages={totalPages} page={page} method={searchMore} />}
         </Route>
         <Route path='/mymovielist' exact>
@@ -189,10 +191,9 @@ const App = () => {
             placeholder={myPlaceholder}
           />
           <MovieNavBar current={2} />
-          <MoviesDbList movies={myMovies} nbResults={1} />
+          <MoviesDbList movies={myMovies} my={true}/>
         </Route>
       </Switch>
-
     </main>
   );
 };

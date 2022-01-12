@@ -4,11 +4,47 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 const Item = ({
-  title, overview, film_id, poster_path,
+  title, overview, film_id, poster_path, true_id, my,
 }) => {
 
   const [directorName, setDirectorName] = useState('');
 
+  const buttonText = my ? 'Supprimer de ma liste' : 'Ajouter à ma liste';
+
+  const postMovie = () => {
+    axios.post('https://v1-my-digital-library-api.herokuapp.com/films', {
+      title: title,
+      overview: overview,
+      film_id: film_id,
+      poster_path: poster_path,
+    })
+    .then(
+      (response) => {
+        console.log(response);
+      }
+    )
+    .catch(
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+
+  const deleteMovie = () => {
+    axios.delete(`https://v1-my-digital-library-api.herokuapp.com/films/${true_id}`)
+    .then(
+      (response) => {
+        console.log(response, 'deleted');
+      }
+    )
+    .catch(
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+
+  const handdleClick = () => my ? deleteMovie() : postMovie();
 
   const getDirectors = () => {
     const directors = [];
@@ -56,24 +92,8 @@ const Item = ({
         <p className="movielist__card__header__overview">{trimOverview(650)}</p>
         <button className="movielist__card__header__button" onClick={() => {
           window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-          console.log(film_id);
-          axios.post('https://v1-my-digital-library-api.herokuapp.com/films', {
-            title: title,
-            overview: overview,
-            film_id: film_id,
-            poster_path: poster_path,
-          })
-          .then(
-            (response) => {
-              console.log(response);
-            }
-          )
-          .catch(
-            (error) => {
-              console.log(error);
-            }
-          );
-        }}>Ajouter ce film à ma liste</button>
+          handdleClick();
+        }}>{buttonText}</button>
       </div>
     </div>
   );
@@ -82,6 +102,7 @@ const Item = ({
 Item.defaultProps = {
   overview: 'Ce film n\'a pas de description',
   poster_path: 'https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg',
+  true_id: 0,
 };
 
 Item.propTypes = {
@@ -89,6 +110,8 @@ Item.propTypes = {
   overview: PropTypes.string,
   poster_path: PropTypes.string,
   film_id: PropTypes.number.isRequired,
+  true_id: PropTypes.number,
+  my: PropTypes.bool.isRequired,
 };
 
 export default Item;
