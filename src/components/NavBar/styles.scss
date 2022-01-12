@@ -16,7 +16,8 @@
   }
   &__items {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-end;
+    padding: 0 5rem;
     width: 60%;
     font-size: 1.3rem;
   }

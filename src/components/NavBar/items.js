@@ -3,7 +3,7 @@ import NavItem from './item';
 
 // == Composant
 const NavItems = () => (
-  <><NavItem name='Home' link='/' /><NavItem name='LOL' link='/lol' /></>
+  <><NavItem name='Films' link='/' /></>
 );
 
 // == Export

@@ -33,6 +33,7 @@ const App = () => {
       setPlaceholder('Ajouter un nouveau film à la bibliothèque');
       setSearchValue('');
       setMovies([]);
+      setTotalPages(1);
     } else {
       setReverse(true);
       setPlaceholder('Ajouter un nouveau film à la bibliothèque');
@@ -66,6 +67,7 @@ const App = () => {
           console.log('Une erreur est survenue...', true);
 
           setMovies([]);
+          setTotalPages(1);
           setPage(null);
           setNbResults(0);
         },
@@ -91,6 +93,7 @@ const App = () => {
         console.log('Une erreur est survenue...', true);
 
         setRepos([]);
+        setTotalPages(1);
         setPage(null);
         setNbResults(0);
 
