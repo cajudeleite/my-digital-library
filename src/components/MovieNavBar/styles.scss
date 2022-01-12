@@ -5,13 +5,14 @@
   justify-content: space-between;
   width: 65%;
   flex-wrap: wrap;
+  padding-bottom: 1rem;
   border-bottom: 2px solid vars.$mariner;
   &__link {
-    color: vars.$golden-grass;
-    padding-right: 1rem;
+    color: vars.$mariner;
+    padding: 1rem 1rem 0 0;
     &__current {
       color: vars.$big-stone;
-      padding-right: 1rem;
+      padding: 1rem 1rem 0 0;
     }
   }
 }
