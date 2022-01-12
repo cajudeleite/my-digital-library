@@ -8,3 +8,14 @@ export const simplifyMovies = (movies) => (
     }),
   )
 );
+
+export const simplifyMyMovies = (movies) => (
+  movies.map(
+    (movie) => ({
+      title: movie.title,
+      overview: movie.overview,
+      film_id: movie.film_id,
+      poster_path: movie.poster_path,
+    }),
+  )
+);

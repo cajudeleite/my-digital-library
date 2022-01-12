@@ -1,0 +1,17 @@
+@use '../../styles/vars';
+
+.movie-navbar {
+  display: flex;
+  justify-content: space-between;
+  width: 65%;
+  flex-wrap: wrap;
+  border-bottom: 2px solid vars.$mariner;
+  &__link {
+    color: vars.$golden-grass;
+    padding-right: 1rem;
+    &__current {
+      color: vars.$big-stone;
+      padding-right: 1rem;
+    }
+  }
+}

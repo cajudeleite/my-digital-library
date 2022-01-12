@@ -57,22 +57,6 @@ const Item = ({
         <button className="movielist__card__header__button" onClick={() => {
           window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
           console.log(film_id);
-          axios.post('https://v1-my-digital-library-api.herokuapp.com/films', {
-            title: title,
-            overview: overview,
-            film_id: film_id,
-            poster_path: poster_path,
-          })
-          .then(
-            (response) => {
-              console.log(response);
-            }
-          )
-          .catch(
-            (error) => {
-              console.log(error);
-            }
-          );
         }}>Ajouter ce film à ma liste</button>
       </div>
     </div>
