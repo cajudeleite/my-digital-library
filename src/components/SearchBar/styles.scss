@@ -25,10 +25,14 @@
       right: 2rem;
       top: 8px;
       z-index: 0;
-      button {
-        border: none;
-        padding: 0;
-        background: none;
+      &__ghost {
+        cursor: pointer;
+        position: absolute;
+        height: 37px;
+        width: 37px;
+        right: 16%;
+        top: 18%;
+        z-index: 1;
       }
     }
   }
@@ -38,6 +42,11 @@
   .searchbar {
     &__form {
       width: 80%;
+      &__button {
+        &__ghost {
+          right: 12%;
+        }
+      }
     }
   }
 }

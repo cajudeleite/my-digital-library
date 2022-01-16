@@ -2,10 +2,10 @@ import './styles.scss';
 import PropTypes from 'prop-types'
 import Item from './item';
 
-const MoviesDbList = ({ movies, my }) => (
+const MoviesDbList = ({ movies, my, method }) => (
   <section className='movielist'>
     {movies.map(
-      (movie) => <Item key={movie.film_id} {...movie} my={my} />,
+      (movie) => <Item key={movie.film_id} {...movie} my={my} method={method} />,
     )}
   </section>
 );
@@ -17,6 +17,7 @@ MoviesDbList.propTypes = {
     }),
   ).isRequired,
   my: PropTypes.bool.isRequired,
+  method: PropTypes.func.isRequired,
 };
 
 export default MoviesDbList;

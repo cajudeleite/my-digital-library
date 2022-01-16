@@ -2,14 +2,52 @@ import './styles.scss';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { simplifyMyMovies } from '../../utils/movies';
 
 const Item = ({
-  title, overview, film_id, poster_path, true_id, my,
+  title, overview, film_id, poster_path, true_id, my, method
 }) => {
 
   const [directorName, setDirectorName] = useState('');
 
-  const buttonText = my ? 'Supprimer de ma liste' : 'Ajouter à ma liste';
+  const [alreadyInList, setAlreadyInList] = useState(false);
+
+  const history = useHistory();
+
+  const checkInList = () => {
+    axios.get('https://v1-my-digital-library-api.herokuapp.com/films')
+      .then(
+        (response) => {
+          const moviesFromApi = response.data;
+
+          const formatedMoviesFromApi = simplifyMyMovies(moviesFromApi);
+
+          formatedMoviesFromApi.map(
+            (movie) => {
+              const movieId = movie.film_id;
+              if (movieId === film_id) {
+                setAlreadyInList(true);
+              }
+            }
+          );
+        },
+      ).catch(
+        () => {
+          console.log('Une erreur est survenue...', true);
+        },
+      );
+  };
+
+  const buttonText = () => {
+    checkInList();
+    if (my) {
+      return 'Supprimer de ma liste';
+    } else if (alreadyInList) {
+      return 'Déjà dans la liste';
+    };
+    return 'Ajouter à ma liste';
+  };
 
   const postMovie = () => {
     axios.post('https://v1-my-digital-library-api.herokuapp.com/films', {
@@ -44,7 +82,19 @@ const Item = ({
     );
   };
 
-  const handdleClick = () => my ? deleteMovie() : postMovie();
+  const handdleClick = () => {
+    checkInList();
+    if (my) {
+      deleteMovie();
+      method();
+    } else if (alreadyInList) {
+      console.log('Tu l\'as déjà');
+    } else {
+      postMovie();
+      checkInList();
+    };
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  };
 
   const getDirectors = () => {
     const directors = [];
@@ -90,10 +140,7 @@ const Item = ({
         <h2 className="movielist__card__header__title">{title}</h2>
         <h3 className="movielist__card__header__directors">{directorName}</h3>
         <p className="movielist__card__header__overview">{trimOverview(650)}</p>
-        <button className="movielist__card__header__button" onClick={() => {
-          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-          handdleClick();
-        }}>{buttonText}</button>
+        <button className="movielist__card__header__button" onClick={() => handdleClick()}>{buttonText()}</button>
       </div>
     </div>
   );
@@ -112,6 +159,7 @@ Item.propTypes = {
   film_id: PropTypes.number.isRequired,
   true_id: PropTypes.number,
   my: PropTypes.bool.isRequired,
+  method: PropTypes.func.isRequired,
 };
 
 export default Item;
